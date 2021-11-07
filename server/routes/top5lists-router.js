@@ -1,3 +1,4 @@
+
 const auth = require('../auth')
 const express = require('express')
 const Top5ListController = require('../controllers/top5list-controller')
@@ -13,4 +14,6 @@ router.get('/top5listpairs', auth.verify, Top5ListController.getTop5ListPairs)
 
 router.post('/register', UserController.registerUser)
 router.get('/loggedIn', UserController.getLoggedIn)
+router.post('/login', UserController.loginUser)
+router.get('/logout',UserController.logoutUser);
 module.exports = router

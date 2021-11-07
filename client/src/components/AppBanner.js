@@ -48,6 +48,7 @@ export default function AppBanner() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
+            <MenuItem onClick={handleMenuClose}><Link to='/login/'>Login in</Link></MenuItem>
             <MenuItem onClick={handleMenuClose}><Link to='/register/'>Create New Account</Link></MenuItem>
         </Menu>
     );
@@ -67,7 +68,7 @@ export default function AppBanner() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            <MenuItem onClick={handleLogout}><Link to='/logout/'>Logout</Link></MenuItem>
         </Menu>        
 
     let editToolbar = "";
@@ -80,7 +81,12 @@ export default function AppBanner() {
     }
     
     function getAccountMenu(loggedIn) {
-        return <AccountCircle />;
+        if (!loggedIn){
+            return <AccountCircle/>;
+        }
+        else{
+            return auth.user.lastName[0]+auth.user.firstName[0];
+        }
     }
 
     return (

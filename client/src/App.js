@@ -3,12 +3,14 @@ import { React } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { AuthContextProvider } from './auth';
 import { GlobalStoreContextProvider } from './store'
+import SignInSide from './components/SignInSide.js';
 import {
     AppBanner,
     HomeWrapper,
     RegisterScreen,
+    SplashScreen,
     Statusbar,
-    WorkspaceScreen
+    WorkspaceScreen,
 } from './components'
 /*
     This is our application's top-level component.
@@ -31,6 +33,8 @@ const App = () => {
                         <Route path="/" exact component={HomeWrapper} />
                         <Route path="/register/" exact component={RegisterScreen} />
                         <Route path="/top5list/:id" exact component={WorkspaceScreen} />
+                        <Route path="/login/" exact component={SignInSide} />
+                        <Route path="/logout/" exact component={SplashScreen}/>
                     </Switch>
                     <Statusbar />
                 </GlobalStoreContextProvider>
