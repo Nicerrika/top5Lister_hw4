@@ -15,7 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { GlobalStoreContext } from '../store/index.js';
 import { useContext } from 'react'
 import AuthContext from '../auth'
-
+import ErrorScreen from './ErrorScreen'
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -129,6 +129,7 @@ export default function SignInSide() {
                 </Grid>
               </Grid>
               <Copyright sx={{ mt: 5 }} />
+              <ErrorScreen/>
             </Box>
           </Box>
         </Grid>

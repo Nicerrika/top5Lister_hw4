@@ -1,4 +1,5 @@
 const Top5List = require('../models/top5list-model');
+const User = require('../models/user-model');
 
 createTop5List = (req, res) => {
     const body = req.body;
@@ -25,6 +26,7 @@ createTop5List = (req, res) => {
             })
         })
         .catch(error => {
+            console.log("Fuckkkkkk");
             return res.status(400).json({
                 error,
                 message: 'Top 5 List Not Created!'
@@ -109,7 +111,8 @@ getTop5Lists = async (req, res) => {
     }).catch(err => console.log(err))
 }
 getTop5ListPairs = async (req, res) => {
-    await Top5List.find({ }, (err, top5Lists) => {
+    const existingUser = await User.findOne({ _id: req.userId });
+    await Top5List.find({ownerEmail:existingUser.email}, (err, top5Lists) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }

@@ -10,7 +10,9 @@ getLoggedIn = async (req, res) => {
             user: {
                 firstName: loggedInUser.firstName,
                 lastName: loggedInUser.lastName,
-                email: loggedInUser.email
+                email: loggedInUser.email,
+                // name: loggedInUser.name,
+                // items: loggedInUser.items
             }
         }).send();
     })
@@ -31,6 +33,13 @@ registerUser = async (req, res) => {
                     errorMessage: "Please enter a password of at least 8 characters."
                 });
         }
+        if (password !== passwordVerify) {
+            return res
+                .status(400)
+                .json({
+                    errorMessage: "Please enter the same password twice."
+                })
+        }
         const existingUser = await User.findOne({ email: email });
         if (existingUser) {
             return res
@@ -44,6 +53,8 @@ registerUser = async (req, res) => {
         const saltRounds = 10;
         const salt = await bcrypt.genSalt(saltRounds);
         const passwordHash = await bcrypt.hash(password, salt);
+        // const name = null;
+        // const item = [];
 
         const newUser = new User({
             firstName, lastName, email, passwordHash
@@ -62,7 +73,9 @@ registerUser = async (req, res) => {
             user: {
                 firstName: savedUser.firstName,
                 lastName: savedUser.lastName,
-                email: savedUser.email
+                email: savedUser.email,
+                // name: savedUser.name,
+                // items: savedUser.items
             }
         }).send();
     } catch (err) {
@@ -106,7 +119,9 @@ loginUser = async (req, res) => {
             user: {
                 firstName: existingUser.firstName,
                 lastName: existingUser.lastName,
-                email: existingUser.email
+                email: existingUser.email,
+                // name: existingUser.name,
+                // items: existingUser.items
             }
         }).send();
     } catch (err) {
