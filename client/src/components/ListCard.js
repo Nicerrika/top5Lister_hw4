@@ -53,10 +53,6 @@ function ListCard(props) {
         }
     }
 
-    function showDeleteModal(){
-        return <DeleteModal/>
-    }
-
     function handleUpdateText(event) {
         setText(event.target.value);
     }
