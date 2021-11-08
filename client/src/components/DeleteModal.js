@@ -1,5 +1,10 @@
-import { useContext } from 'react'
-import { GlobalStoreContext } from '../store'
+import { useContext } from 'react';
+import { GlobalStoreContext } from '../store';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal'
+import Button from '@mui/material/Button';
+import Alert from '@mui/material/Alert';
+import AuthContext from '../auth';
 /*
     This modal is shown when the user asks to delete a list. Note 
     that before this is shown a list has to be marked for deletion,
@@ -20,15 +25,24 @@ function DeleteModal() {
         name = store.currentList.name;
     }
     function handleDeleteList(event) {
+        console.log("Fuckkkkkkkkkk");
         store.deleteMarkedList();
     }
     function handleCloseModal(event) {
-        store.hideDeleteListModal();
+        store.unmarkListForDeletion();
     }
+    const style = {
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        p: 2,
+        px: 4,
+        pb: 3,
+    };
     return (
         <Modal
-            open={auth.error}
-            onClose={!auth.error}
+            open={store.listMarkedForDeletion!=null}
+            onClose={store.listMarkedForDeletion==null}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
             style={{display:'flex',alignItems:'center',justifyContent:'center'}}
@@ -44,7 +58,7 @@ function DeleteModal() {
                 <Button
                     onClick={handleCloseModal}
                 >
-                    confirm
+                    Cancel
                 </Button>
             </Box>
 

@@ -6,7 +6,7 @@ import ListItem from '@mui/material/ListItem';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import DeleteModal from './DeleteModal.js';
 /*
     This is a card in our list of top 5 lists. It lets select
     a list for editing and it has controls for changing its 
@@ -52,6 +52,11 @@ function ListCard(props) {
             toggleEdit();
         }
     }
+
+    function showDeleteModal(){
+        return <DeleteModal/>
+    }
+
     function handleUpdateText(event) {
         setText(event.target.value);
     }
@@ -80,10 +85,12 @@ function ListCard(props) {
                 <Box sx={{ p: 1 }}>
                     <IconButton onClick={(event) => {
                         handleDeleteList(event, idNamePair._id)
+                        //showDeleteModal()
                     }} aria-label='delete'>
                         <DeleteIcon style={{fontSize:'48pt'}} />
                     </IconButton>
                 </Box>
+                <DeleteModal/>
         </ListItem>
 
     if (editActive) {
