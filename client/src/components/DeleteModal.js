@@ -25,7 +25,7 @@ function DeleteModal() {
         name = store.currentList.name;
     }
     function handleDeleteList(event) {
-        console.log("Fuckkkkkkkkkk");
+        //console.log("Fuckkkkkkkkkk");
         store.deleteMarkedList();
     }
     function handleCloseModal(event) {
@@ -52,7 +52,7 @@ function DeleteModal() {
                 <Button
                     onClick={handleDeleteList}
                 >
-                    confirm
+                    Confirm
                 </Button>
 
                 <Button

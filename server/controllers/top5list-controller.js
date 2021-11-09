@@ -90,11 +90,15 @@ deleteTop5List = async (req, res) => {
 }
 
 getTop5ListById = async (req, res) => {
+    const existingUser = await User.findOne({ _id: req.userId });
     await Top5List.findById({ _id: req.params.id }, (err, list) => {
         if (err) {
             return res.status(400).json({ success: false, error: err });
         }
-        return res.status(200).json({ success: true, top5List: list })
+        if (existingUser.email===list.ownerEmail){
+            console.log(list.ownerEmail);
+            return res.status(200).json({ success: true, top5List: list })
+        }
     }).catch(err => console.log(err))
 }
 getTop5Lists = async (req, res) => {

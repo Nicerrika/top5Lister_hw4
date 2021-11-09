@@ -21,7 +21,7 @@ function ListCard(props) {
     const { idNamePair } = props;
 
     function handleLoadList(event, id) {
-        if (!event.target.disabled) {
+        if (!event.target.disabled && !cardStatus) {
             // CHANGE THE CURRENT LIST
             store.setCurrentList(id);
         }
@@ -56,6 +56,11 @@ function ListCard(props) {
     function handleUpdateText(event) {
         setText(event.target.value);
     }
+    
+    let cardStatus = false;
+    if (store.isListNameEditActive) {
+        cardStatus = true;
+    }
 
     let cardElement =
         <ListItem
@@ -74,7 +79,7 @@ function ListCard(props) {
         >
                 <Box sx={{ p: 1, flexGrow: 1 }}>{idNamePair.name}</Box>
                 <Box sx={{ p: 1 }}>
-                    <IconButton onClick={handleToggleEdit} aria-label='edit'>
+                    <IconButton onClick={handleToggleEdit} aria-label='edit' disabled={cardStatus}>
                         <EditIcon style={{fontSize:'48pt'}} />
                     </IconButton>
                 </Box>
@@ -82,11 +87,10 @@ function ListCard(props) {
                     <IconButton onClick={(event) => {
                         handleDeleteList(event, idNamePair._id)
                         //showDeleteModal()
-                    }} aria-label='delete'>
+                    }} aria-label='delete' disabled={cardStatus}>
                         <DeleteIcon style={{fontSize:'48pt'}} />
                     </IconButton>
                 </Box>
-                <DeleteModal/>
         </ListItem>
 
     if (editActive) {

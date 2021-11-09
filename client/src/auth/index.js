@@ -23,9 +23,9 @@ function AuthContextProvider(props) {
     });
     const history = useHistory();
 
-    // useEffect(() => {
-    //     auth.getLoggedIn();
-    // }, []);
+    useEffect(() => {
+        auth.getLoggedIn();
+    }, []);
 
     const authReducer = (action) => {
         const { type, payload } = action;
@@ -70,17 +70,18 @@ function AuthContextProvider(props) {
                     error_message: payload.msg
                 })
             }
+
             default:
                 return auth;
         }
     }
 
     auth.getLoggedIn = async function () {
-        const response = await api.getLoggedIn();
+        //const response = await api.getLoggedIn();
         try{
             const response = await api.getLoggedIn();
             authReducer({
-                type: AuthActionType.SET_LOGGED_IN,
+                type: AuthActionType.GET_LOGGED_IN,
                 payload: {
                     loggedIn: response.data.loggedIn,
                     user: response.data.user
@@ -88,14 +89,7 @@ function AuthContextProvider(props) {
             });
         }
         catch(err){
-            authReducer({
-                type: AuthActionType.ERROR_MODAL,
-                payload: {
-                    error: true,
-                    msg: err.response.data.errorMessage
-                }
-            });
-
+            console.log("What happen");
         }
         
     }

@@ -64,14 +64,16 @@ function Top5Item(props) {
 
     function handleKeyPress(event) {
         if (event.code === "Enter") {
-            store.addUpdateItemTransaction(props.index, text);
+            store.addUpdateItemTransaction(props.index, event.target.value);
             toggleEdit();
         }
     }
 
-    function handleUpdateText(event) {
-        setText(event.target.value);
+    let editStatus = false;
+    if (store.isItemEditActive) {
+        editStatus = true;
     }
+
 
     let {index } = props;
 
@@ -108,7 +110,7 @@ function Top5Item(props) {
                 }}
             >
             <Box sx={{ p: 1 }}>
-                <IconButton onClick={handleToggleEdit} aria-label='edit'>
+                <IconButton onClick={handleToggleEdit} aria-label='edit' disabled={editStatus}>
                     <EditIcon style={{fontSize:'48pt'}}  />
                 </IconButton>
             </Box>
@@ -127,8 +129,7 @@ function Top5Item(props) {
                 autoComplete="Top 5 Item Name"
                 className='top5-item'
                 onKeyPress={handleKeyPress}
-                onChange={handleUpdateText}
-                defaultValue={text}
+                defaultValue={props.text}
                 inputProps={{style: {fontSize: 48}}}
                 InputLabelProps={{style: {fontSize: 24}}}
                 autoFocus

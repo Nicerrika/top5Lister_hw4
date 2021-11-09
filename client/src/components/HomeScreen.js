@@ -4,6 +4,7 @@ import ListCard from './ListCard.js'
 import { Fab, Typography } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
 import List from '@mui/material/List';
+import DeleteModal from './DeleteModal.js';
 /*
     This React component lists all the top5 lists in the UI.
     
@@ -20,6 +21,10 @@ const HomeScreen = () => {
         store.createNewList();
     }
     let listCard = "";
+    let cardStatus = false;
+    if (store.isListNameEditActive) {
+        cardStatus = true;
+    }
     if (store) {
         listCard = 
             <List sx={{ width: '90%', left: '5%', bgcolor: 'background.paper' }}>
@@ -41,6 +46,7 @@ const HomeScreen = () => {
                 color="primary" 
                 aria-label="add"
                 id="add-list-button"
+                disabled={cardStatus}
                 onClick={handleCreateNewList}
             >
                 <AddIcon />
@@ -52,6 +58,7 @@ const HomeScreen = () => {
                     listCard
                 }
             </div>
+            <DeleteModal/>
         </div>)
 }
 
