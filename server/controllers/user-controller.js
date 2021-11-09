@@ -94,13 +94,14 @@ loginUser = async (req, res) => {
         }
 
         const existingUser = await User.findOne({ email: email });
-        const passwordCorrect = await bcrypt.compare(password,existingUser.passwordHash);
+        //const passwordCorrect = await bcrypt.compare(password,existingUser.passwordHash);
 
         if (!existingUser){
             return res
                 .status(400)
                 .json({ errorMessage: "Wrong e-mail or password! " });
         }
+        const passwordCorrect = await bcrypt.compare(password,existingUser.passwordHash);
         if (!passwordCorrect){
             return res
                 .status(400)

@@ -387,6 +387,15 @@ function GlobalStoreContextProvider(props) {
         });
     }
 
+    //Test for delete
+    // store.test = async function () {
+    //     let response = await api.deleteTop5ListById("6189c1b7b5fef727b0818924");
+    //     if (response.data.success) {
+    //         store.loadIdNamePairs();
+    //         history.push("/");
+    //     }
+    // }
+
     return (
         <GlobalStoreContext.Provider value={{
             store

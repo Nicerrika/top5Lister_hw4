@@ -60,6 +60,13 @@ function DeleteModal() {
                 >
                     Cancel
                 </Button>
+{/* 
+                <Button
+                    onClick={store.test()}
+                >
+                    LOL
+                </Button> */}
+
             </Box>
 
         </Modal>
